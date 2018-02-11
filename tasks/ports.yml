@@ -6,6 +6,7 @@
     state: "{{ item[1]['state'] }}"
     tag: "{{ item[1]['tag']|default(omit) }}"
     timeout: "{{ item[0]['timeout']|default(omit) }}"
+    set: "{{ item[1]['set']|default(omit) }}"
   become: true
   with_subelements:
     - '{{ openvswitch_ports }}'

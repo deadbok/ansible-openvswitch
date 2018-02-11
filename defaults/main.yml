@@ -1,22 +1,33 @@
 ---
 # defaults file for ansible-openvswitch
 
-openvswitch_bridges: []
-  # - bridge: 'br-int'
-  #   state: 'present'
+openvswitch_bridges:
+ - bridge: 'br-int'
+   state: 'present'
 
 openvswitch_debian_packages:
   - 'openvswitch-switch'
   - 'openvswitch-common'
 
-openvswitch_ports: []
-  # - bridge: 'br-int'
-  #   ports:
-  #     - port: 'enp0s9'
-  #       state: 'present'
-  #     - port: 'enp0s10'
-  #       state: 'present'
-
+openvswitch_ports:
+ - bridge: 'br-int'
+   ports:
+     - port: 'eth1'
+       state: 'present'
+       set: 'port eth1 vlan_mode=native-untagged trunks=10,11,12 lacp=active'
+     - port: 'eth2'
+       state: 'present'
+       tag: 10
+       set: 'port eth2 lacp=active'
+     - port: 'eth3'
+       state: 'present'
+       tag: 11
+       set: 'port eth3 lacp=active'
+     - port: 'eth4'
+       state: 'present'
+       tag: 12
+       set: 'port eth4 lacp=active'
+  
 openvswitch_system_tuning: []
   # - name: 'net.ipv4.ip_forward'
   #   value: 1
